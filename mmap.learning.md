@@ -262,7 +262,9 @@ else if (flags & MAP_HUGETLB)
     根据输入的页面大小对数（即以2为底的指数），返回对应的HugeTLB页面状态描述符 struct hstate
     Linux 内核中，每种支持的巨型页大小（如 2MB、1GB）在系统启动或模块加载时只会被创建一次，然后全局复用
     系统内部维持着一个pool，调用函数后会在池中寻找合适的块分配给调用者
-    本质是获取一个容器，待往里面填充合适的数据(等待后续分配内存后注入分配内存的信息)
+	hstate ≈ “某一种 huge page size 的全局描述符”，page size一旦确认hstate就唯一确认。
+	在一个运行中的 Linux 系统里，对于每一种 supported huge page size（例如 2MB、1GB），全局通常只有一个对应的 hstate 实例。
+	多个file对应同一个hstate
 */
 #include "include/linux/hugetlb.h"
 #ifdef CONFIG_HUGETLB_PAGE
