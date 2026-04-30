@@ -596,6 +596,9 @@ static inline void userfaultfd_unmap_complete(struct mm_struct *mm,
 					      struct list_head *uf)
 {
 }
+
+extern void userfaultfd_unmap_complete(struct mm_struct *mm,
+				       struct list_head *uf);
 ```  
 
 ### 
